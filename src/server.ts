@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import ordersRouter from './routes/orders';
 import { errorHandler } from './middleware/errorHandler';
@@ -17,7 +17,7 @@ app.use(cors(corsOptions));  // This should add the headers
 
 
 // Logging middleware AFTER CORS, BEFORE routes
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
   console.log('Headers:', req.headers);
   next();
@@ -28,7 +28,7 @@ app.use(express.json());
 // Routes AFTER middleware
 app.use('/api/orders', ordersRouter);
 
-app.get('/health', (req, res) => {
+app.get('/health', (req: Request, res: Response) => {
   res.json({ status: 'OK' });
 });
 
