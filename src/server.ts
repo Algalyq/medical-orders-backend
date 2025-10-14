@@ -35,7 +35,7 @@ app.get('/health', (req: Request, res: Response) => {
 // Error handling LAST
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 
 const startServer = async () => {
   try {
