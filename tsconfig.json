@@ -9,8 +9,8 @@
     "strict": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    // "types": ["node", "express", "cors"],
+    "resolveJsonModule": true,  
+    "types": ["node", "express"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
