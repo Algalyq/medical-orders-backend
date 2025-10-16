@@ -6,15 +6,29 @@ import { prisma } from './config/database';
 
 const app = express();
 
+// Define allowed origins explicitly
+const allowedOrigins = [
+  'https://your-domain.com', // Replace with your frontend domain
+  'https://medical-orders-frontend.vercel.app', // Include subdomains if needed
+  'http://localhost:3000', // For local development
+];
+
 // Apply CORS FIRST
 const corsOptions = {
-  origin: true,  // Exact origin of your frontend
+  origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
+    // Allow requests with no origin (e.g., server-to-server requests) or if origin is in allowedOrigins
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization'],  // Add 'Authorization' if using auth tokens
-  credentials: true  // Set to false if not using credentials (recommended if unsure)
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true, // Allow credentials
 };
-app.use(cors(corsOptions));  // This should add the headers
 
+app.use(cors(corsOptions));
 
 // Logging middleware AFTER CORS, BEFORE routes
 app.use((req: Request, res: Response, next: NextFunction) => {

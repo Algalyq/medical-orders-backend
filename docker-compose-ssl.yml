@@ -17,8 +17,11 @@ services:
     image: nginx:alpine
     ports:
       - "80:80"
+      - "443:443" # Add HTTPS port
     volumes:
       - ./nginx/:/etc/nginx/conf.d/
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
     depends_on:
       - app
     networks:
@@ -44,6 +47,16 @@ services:
       - DATABASE_URL=postgresql://postgres:postgres@db:5432/medical_orders?schema=public
     depends_on:
       - db
+    networks:
+      - app-network
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+    depends_on:
+      - nginx
     networks:
       - app-network
 
