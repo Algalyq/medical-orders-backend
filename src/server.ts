@@ -8,7 +8,7 @@ const app = express();
 
 // Apply CORS FIRST
 const corsOptions = {
-  origin: '*',  // Exact origin of your frontend
+  origin: true,  // Exact origin of your frontend
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization'],  // Add 'Authorization' if using auth tokens
   credentials: true  // Set to false if not using credentials (recommended if unsure)
