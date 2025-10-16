@@ -7,7 +7,8 @@ fi
 domains=(94.131.89.67)
 rsa_key_size=4096
 data_path="./data/certbot"
-staging=1 # Set to 1 if you're testing your setup to avoid hitting request limits
+email="your-email@example.com"  # Add this line after the domains line
+staging=1
 
 # Check if domains are set
 if [ -z "$domains" ]; then
