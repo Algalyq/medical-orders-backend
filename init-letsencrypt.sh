@@ -4,11 +4,10 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   echo 'Error: docker-compose is not installed.' >&2
   exit 1
 fi
-domains=(your-domain.com www.your-domain.com)
+domains=(94.131.89.67)
 rsa_key_size=4096
 data_path="./data/certbot"
-email="your-email@example.com" # Adding a valid address is strongly recommended
-staging=0 # Set to 1 if you're testing your setup to avoid hitting request limits
+staging=1 # Set to 1 if you're testing your setup to avoid hitting request limits
 
 # Check if domains are set
 if [ -z "$domains" ]; then
